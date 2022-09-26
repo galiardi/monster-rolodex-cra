@@ -49,6 +49,7 @@ export default class App extends Component {
     return (
       <>
         <main>
+          <h1 className="app-title">Monster Rolodex</h1>
           <SearchInput placeholder="..." onChangeHandler={onSearchChange} />
           <CardList monsters={filteredMonsters} />
         </main>
