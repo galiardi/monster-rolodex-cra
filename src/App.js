@@ -7,7 +7,7 @@ import "./App.css";
 const App = () => {
   console.log("render App");
   const [monsters, setMonsters] = useState([]);
-  // const [filteredMonsters, setFilteredMonster] = useState("");
+  const [filteredMonsters, setFilteredMonster] = useState([]);
   const [searchString, setSearchString] = useState("");
   const [string, setString] = useState("");
 
@@ -18,6 +18,14 @@ const App = () => {
       .then((users) => setMonsters(users));
   }, []);
 
+  useEffect(() => {
+    const newFilteredMonsters = monsters.filter((monster) => {
+      console.log("filtering monster");
+      return monster.name.toLowerCase().includes(searchString);
+    });
+    setFilteredMonster(newFilteredMonsters);
+  }, [monsters, searchString]);
+
   const onSearchChange = (event) => {
     const newSearchString = event.target.value.toLowerCase();
     setSearchString(newSearchString);
@@ -27,11 +35,6 @@ const App = () => {
     const newString = event.target.value;
     setString(newString);
   };
-
-  const filteredMonsters = monsters.filter((monster) => {
-    console.log("filtering monster");
-    return monster.name.toLowerCase().includes(searchString);
-  });
 
   return (
     <div>
